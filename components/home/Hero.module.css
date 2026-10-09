@@ -1,0 +1,162 @@
+.hero {
+  position: relative;
+  min-height: max(100svh, 680px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---------- Photograph ---------- */
+
+.media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 56vw;
+  z-index: 0;
+}
+
+.drift,
+.drift > .photo {
+  position: absolute;
+  inset: 0;
+}
+
+/* Darkens the lower edge so the headline stays legible where it crosses. */
+.shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 22%, rgba(10, 10, 10, 0) 46%),
+    linear-gradient(to right, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0) 30%);
+}
+
+.plate {
+  position: absolute;
+  top: calc(var(--header-h) + 1.5rem);
+  right: var(--gutter);
+  display: grid;
+  justify-items: end;
+  gap: 0.2rem;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(241, 237, 229, 0.85);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.plate span:first-child {
+  color: rgba(241, 237, 229, 0.6);
+}
+
+/* ---------- Copy ---------- */
+
+.copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: 1.6rem;
+  width: min(36vw, 30rem);
+  margin-left: var(--gutter);
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 9vh, 7rem));
+}
+
+.lede {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 1.7vw, 1.6rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
+}
+
+.price {
+  font-size: 0.8rem;
+  color: var(--fg-soft);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Headline ---------- */
+
+.title {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  bottom: clamp(1.75rem, 5vh, 3.5rem);
+  font-size: min(11.4vw, 17.5vh);
+  pointer-events: none;
+}
+
+.indent {
+  padding-left: 0.62em;
+}
+
+/* Pre-paint state for the entrance (only when motion is allowed). */
+:global(.motion-ok) .media {
+  clip-path: inset(100% 0% 0% 0%);
+}
+
+:global(.motion-ok) .title [data-hero-line] > span {
+  transform: translateY(110%);
+}
+
+:global(.motion-ok) [data-hero-fade] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* ---------- Mobile: photograph first, headline over its foot ---------- */
+
+@media (max-width: 899px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: min(78svh, 46rem);
+    flex: none;
+  }
+
+  .shade {
+    background:
+      linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.6) 26%, rgba(10, 10, 10, 0) 52%),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.5) 0%, rgba(10, 10, 10, 0) 22%);
+  }
+
+  .plate {
+    top: auto;
+    bottom: calc(15.5vw * 2.65 + 2.5rem);
+    right: var(--gutter);
+  }
+
+  .title {
+    position: absolute;
+    top: calc(min(78svh, 46rem) - 15.5vw * 2.62 - 0.75rem);
+    bottom: auto;
+    font-size: 15.5vw;
+  }
+
+  .copy {
+    width: auto;
+    margin: 0;
+    padding: 2.25rem var(--gutter) 4rem;
+    gap: 1.4rem;
+  }
+
+  .lede {
+    font-size: 1.3rem;
+  }
+}

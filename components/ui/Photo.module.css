@@ -1,0 +1,22 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--obsidian-2);
+}
+
+.layer {
+  position: absolute;
+  inset: -6% 0;
+  will-change: transform;
+}
+
+.img {
+  object-fit: cover;
+  object-position: var(--focus);
+}
+
+@media (max-width: 760px) {
+  .img {
+    object-position: var(--focus-m);
+  }
+}

@@ -1,0 +1,478 @@
+/* ==========================================================================
+   NOIRÉ — design system
+   "The hour after": light moving through a day. Ivory stone by daylight,
+   espresso at dusk, obsidian after dark. Sections declare an environment
+   (theme-*) and every component reads the same few tokens.
+   ========================================================================== */
+
+:root {
+  /* Palette */
+  --obsidian: #0a0a0a;
+  --obsidian-2: #141312;
+  --ivory: #f1ede5;
+  --ivory-2: #e7e1d6;
+  --stone: #a7a19a;
+  --stone-light: #d9d2c6;
+  --espresso: #30221c;
+  --espresso-2: #3b2b23;
+  --bronze: #987653;
+  --ink: #15120f;
+  --ink-soft: #5b534a; /* secondary text on ivory — 6.6:1 */
+  --error: #b2402c;
+  --error-on-dark: #f0a08f;
+
+  /* Type */
+  --serif: var(--font-serif), "Bodoni Moda", "Didot", Georgia, serif;
+  --sans: var(--font-sans), "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --fs-mega: clamp(3.5rem, 11.2vw, 13.5rem);
+  --fs-display: clamp(2.9rem, 7.6vw, 8.75rem);
+  --fs-h2: clamp(2.35rem, 5vw, 5.4rem);
+  --fs-h3: clamp(1.55rem, 2.3vw, 2.25rem);
+  --fs-lede: clamp(1.02rem, 1.12vw, 1.14rem);
+  --fs-label: 0.6875rem;
+
+  /* Layout */
+  --gutter: clamp(1rem, 3.4vw, 3.5rem);
+  --max: 1520px;
+  --header-h: 72px;
+  --section-y: clamp(6rem, 13vw, 13rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Default environment */
+  --bg: var(--obsidian);
+  --fg: var(--ivory);
+  --fg-soft: var(--stone);
+  --rule: rgba(241, 237, 229, 0.16);
+  --accent: #b8946c;
+  --err: var(--error-on-dark);
+}
+
+/* ---------- Environments ---------- */
+
+.theme-dark {
+  --bg: var(--obsidian);
+  --fg: var(--ivory);
+  --fg-soft: var(--stone);
+  --rule: rgba(241, 237, 229, 0.16);
+  --accent: #b8946c;
+  --err: var(--error-on-dark);
+}
+
+.theme-light {
+  --bg: var(--ivory);
+  --fg: var(--ink);
+  --fg-soft: var(--ink-soft);
+  --rule: rgba(21, 18, 15, 0.14);
+  --accent: #7b5c3e;
+  --err: var(--error);
+}
+
+.theme-espresso {
+  --bg: var(--espresso);
+  --fg: var(--ivory);
+  --fg-soft: #c3b5a6;
+  --rule: rgba(241, 237, 229, 0.16);
+  --accent: #caa57d;
+  --err: var(--error-on-dark);
+}
+
+.theme-stone {
+  --bg: var(--stone-light);
+  --fg: var(--ink);
+  --fg-soft: #4f4840;
+  --rule: rgba(21, 18, 15, 0.16);
+  --accent: #6e5136;
+  --err: var(--error);
+}
+
+.theme-dark,
+.theme-light,
+.theme-espresso,
+.theme-stone {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 8px);
+  background: var(--obsidian);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--obsidian);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--bronze);
+  color: var(--ivory);
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* ---------- Utilities ---------- */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--ivory);
+  color: var(--ink);
+  font-size: var(--fs-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: translateY(-160%);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Small uppercase label — the house voice for metadata. */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--sans);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.label--soft {
+  color: var(--fg-soft);
+}
+
+.label--rule::before {
+  content: "";
+  width: 2.25rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+.mega,
+.display,
+.h2,
+.h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+.mega {
+  font-size: var(--fs-mega);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+}
+
+.display {
+  font-size: var(--fs-display);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+em,
+.italic {
+  font-style: italic;
+}
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.7;
+  color: var(--fg-soft);
+  max-width: 34rem;
+}
+
+.soft {
+  color: var(--fg-soft);
+}
+
+/* Masked headline lines (see components/ui/MaskedLines). */
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  padding-right: 0.08em;
+  margin-right: -0.08em;
+}
+
+.mask-line > span {
+  display: inline-block;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 54px;
+  padding: 0 1.75rem;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 0.45s var(--ease-out),
+    color 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out),
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--fg);
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.btn--line {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--rule);
+}
+
+.btn--line:hover {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: none;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.btn:hover svg[data-arrow] {
+  transform: translateX(4px);
+}
+
+/* Text action with a hairline that retracts on hover. */
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  font-family: var(--sans);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.7rem;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.link:hover::after {
+  transform: scaleX(0);
+}
+
+.link svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.link:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---------- 404 (global so Next does not preload a module on every page) ---------- */
+
+.not-found {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 4fr);
+}
+
+.not-found__photo {
+  order: 2;
+  min-height: 100%;
+}
+
+.not-found__copy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.6rem;
+  padding: calc(var(--header-h) + 3rem) var(--gutter) 4rem;
+}
+
+@media (max-width: 899px) {
+  .not-found {
+    grid-template-columns: 1fr;
+  }
+
+  .not-found__photo {
+    order: 0;
+    height: 50svh;
+  }
+}
+
+/* ---------- Motion bootstrap ----------
+   `motion-ok` is set before first paint (app/layout.tsx) when motion is
+   allowed. Intro elements start hidden only then, so content is always
+   visible without JavaScript or with reduced motion. */
+.motion-ok [data-intro] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

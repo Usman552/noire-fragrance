@@ -1,0 +1,163 @@
+.section {
+  padding-block: var(--section-y) calc(var(--section-y) * 0.8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+}
+
+/* Large plate bleeds off the left edge. */
+.plate {
+  grid-column: 1 / 7;
+  grid-row: 1 / 3;
+  margin-left: calc(-1 * var(--gutter));
+}
+
+.plateImg {
+  aspect-ratio: 4 / 5.2;
+}
+
+.caption {
+  margin: 1rem 0 0 var(--gutter);
+}
+
+.copy {
+  grid-column: 8 / 13;
+  grid-row: 1;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 1.8rem;
+  padding-top: clamp(1rem, 6vw, 6rem);
+}
+
+.title {
+  margin-top: 0.4rem;
+}
+
+.body {
+  max-width: 30rem;
+  font-size: var(--fs-lede);
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+
+.specs {
+  width: 100%;
+  display: grid;
+  border-top: 1px solid var(--rule);
+}
+
+.specs > div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.specs dd {
+  font-size: 0.95rem;
+}
+
+.buy {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  letter-spacing: -0.01em;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.quote {
+  grid-column: 1 / 8;
+  grid-row: 3;
+  align-self: end;
+  margin-top: clamp(4rem, 9vw, 9rem);
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.quote em {
+  color: var(--accent);
+}
+
+.skin {
+  grid-column: 9 / 12;
+  grid-row: 2 / 4;
+  align-self: end;
+  margin-top: clamp(3rem, 6vw, 6rem);
+}
+
+.skinImg {
+  aspect-ratio: 3 / 4;
+}
+
+.skinCaption {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  max-width: 17rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fg-soft);
+}
+
+.skinCaption :global(.label) {
+  color: var(--fg);
+}
+
+@media (max-width: 899px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .plate {
+    grid-column: 1 / 6;
+    grid-row: auto;
+  }
+
+  .copy {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding-top: 3rem;
+  }
+
+  .quote {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-top: 4.5rem;
+    font-size: clamp(2.4rem, 11vw, 4rem);
+  }
+
+  .skin {
+    grid-column: 3 / -1;
+    grid-row: auto;
+    margin-top: 2.5rem;
+  }
+
+  .specs > div {
+    grid-template-columns: 8rem 1fr;
+  }
+}

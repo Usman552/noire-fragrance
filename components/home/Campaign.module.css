@@ -1,0 +1,146 @@
+.section {
+  padding-bottom: var(--section-y);
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+}
+
+.frame {
+  position: relative;
+  height: max(100svh, 640px);
+  overflow: hidden;
+}
+
+.photo {
+  position: absolute !important;
+  inset: 0;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 30% 35%, rgba(10, 10, 10, 0) 40%, rgba(10, 10, 10, 0.55) 100%),
+    linear-gradient(to top, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0) 30%);
+}
+
+.chapter {
+  position: absolute;
+  top: calc(var(--header-h) + 1.5rem);
+  left: var(--gutter);
+  color: rgba(241, 237, 229, 0.75);
+}
+
+.headline {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  padding: calc(var(--header-h) + 4rem) var(--gutter) clamp(2rem, 6vh, 4rem);
+  pointer-events: none;
+}
+
+.l1 {
+  justify-self: end;
+  align-self: start;
+  margin-right: 4vw;
+}
+
+.l2 {
+  justify-self: end;
+  align-self: end;
+  color: rgba(241, 237, 229, 0.9);
+}
+
+/* ---------- After the scene ---------- */
+
+.after {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(5rem, 10vw, 9rem);
+}
+
+.pavilion,
+.neck {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.pavilion {
+  grid-column: 1 / 8;
+  grid-row: 1 / 3;
+}
+
+.pavilionImg {
+  aspect-ratio: 3 / 2;
+}
+
+.quote {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: start;
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 2.5vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.quote em {
+  color: var(--fg-soft);
+}
+
+.neck {
+  grid-column: 10 / 13;
+  grid-row: 2 / 4;
+  margin-top: clamp(3rem, 6vw, 6rem);
+}
+
+.neckImg {
+  aspect-ratio: 3 / 4;
+}
+
+@media (max-width: 899px) {
+  .frame {
+    height: min(88svh, 52rem);
+  }
+
+  .headline {
+    padding-top: calc(var(--header-h) + 3rem);
+    font-size: clamp(2.6rem, 13vw, 4.5rem);
+  }
+
+  .l1 {
+    margin-right: 0;
+  }
+
+  .after {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .pavilion {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
+  .pavilion figcaption {
+    padding-inline: var(--gutter);
+  }
+
+  .quote {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-top: 3.5rem;
+  }
+
+  .neck {
+    grid-column: 3 / -1;
+    grid-row: auto;
+    margin-top: 3rem;
+  }
+}

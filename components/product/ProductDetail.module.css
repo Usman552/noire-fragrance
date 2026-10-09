@@ -1,0 +1,410 @@
+.page {
+  padding-bottom: var(--section-y);
+}
+
+/* ---------- Top: photograph + purchase ---------- */
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+}
+
+.mediaCol {
+  position: relative;
+}
+
+.media {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.photo {
+  position: absolute !important;
+  inset: 0;
+}
+
+.info {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 1.4rem;
+  padding: calc(var(--header-h) + clamp(2rem, 6vh, 4.5rem)) var(--gutter) 4rem clamp(2rem, 4.5vw, 5rem);
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin-bottom: 1rem;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: var(--fg);
+}
+
+.back svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.name {
+  font-size: clamp(3.6rem, 8vw, 8.5rem);
+}
+
+.tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  color: var(--accent);
+  margin-top: -0.4rem;
+}
+
+.desc {
+  max-width: 34rem;
+  font-size: var(--fs-lede);
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+
+.purchaseBox {
+  width: 100%;
+  max-width: 34rem;
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sizes {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.sizes legend {
+  padding: 0;
+  margin-bottom: 0.8rem;
+}
+
+.sizeOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.sizeOption {
+  position: relative;
+  cursor: pointer;
+}
+
+.sizeOption input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.sizeOption span {
+  display: grid;
+  gap: 0.15rem;
+  min-height: 64px;
+  align-content: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--rule);
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
+}
+
+.sizeOption strong {
+  font-weight: 500;
+}
+
+.sizeOption small {
+  font-size: 0.8rem;
+  color: var(--fg-soft);
+}
+
+.sizeOption:hover span {
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+
+.sizeOption input:checked + span {
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
+  box-shadow: inset 0 0 0 1px var(--fg);
+}
+
+.sizeOption input:focus-visible + span {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.purchase {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+}
+
+.service {
+  font-size: 0.8rem;
+  color: var(--fg-soft);
+}
+
+.block {
+  width: 100%;
+  max-width: 34rem;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pyramid,
+.details {
+  display: grid;
+  border-top: 1px solid var(--rule);
+}
+
+.pyramid > div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.pyramid dt {
+  padding-top: 0.35rem;
+}
+
+.pyramid dd {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.pyramid p {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.noteName {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+}
+
+.noteDesc {
+  font-size: 0.86rem;
+  color: var(--fg-soft);
+}
+
+.details > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.92rem;
+}
+
+.details dt {
+  color: var(--fg-soft);
+}
+
+/* ---------- Mood band ---------- */
+
+.mood {
+  position: relative;
+  min-height: max(90svh, 560px);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.moodImg {
+  position: absolute !important;
+  inset: 0;
+  z-index: -2;
+}
+
+.moodShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.88) 0%, rgba(10, 10, 10, 0.3) 45%, rgba(10, 10, 10, 0.1) 100%);
+}
+
+.moodCopy {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 6rem clamp(3rem, 8vh, 5rem);
+}
+
+.story {
+  max-width: 52rem;
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Ingredients ---------- */
+
+.ingredients {
+  margin-top: var(--section-y);
+  display: grid;
+  gap: 2.5rem;
+}
+
+.ingredientRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  align-items: start;
+}
+
+.ingredientRow li:nth-child(even) {
+  margin-top: clamp(2rem, 5vw, 5rem);
+}
+
+.ingredientImg {
+  aspect-ratio: 3 / 4;
+}
+
+.ingredientName {
+  margin-top: 0.8rem;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+}
+
+/* ---------- Related ---------- */
+
+.related {
+  margin-top: var(--section-y);
+  display: grid;
+  gap: 3rem;
+}
+
+.relatedHead {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2vw, 2rem);
+  row-gap: 3rem;
+  align-items: start;
+}
+
+.relatedItem:nth-child(1) {
+  grid-column: 1 / 5;
+}
+
+.relatedItem:nth-child(2) {
+  grid-column: 6 / 9;
+  margin-top: clamp(3rem, 8vw, 8rem);
+}
+
+.relatedItem:nth-child(3) {
+  grid-column: 10 / 13;
+}
+
+.relatedLink {
+  display: grid;
+  gap: 1rem;
+}
+
+.relatedImg {
+  aspect-ratio: 4 / 5;
+}
+
+.relatedImg img {
+  transition: transform 1.2s var(--ease-out);
+}
+
+.relatedLink:hover .relatedImg img {
+  transform: scale(1.04);
+}
+
+.relatedInfo {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.relatedName {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  letter-spacing: -0.015em;
+}
+
+.relatedName svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (max-width: 899px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .media {
+    position: relative;
+    height: 78svh;
+    min-height: 480px;
+  }
+
+  .info {
+    padding: 2.25rem var(--gutter) 3rem;
+  }
+
+  .crumbs {
+    margin-bottom: 0;
+  }
+
+  .ingredientRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .relatedItem:nth-child(1) {
+    grid-column: 1 / 9;
+  }
+
+  .relatedItem:nth-child(2) {
+    grid-column: 5 / 13;
+    margin-top: 0;
+  }
+
+  .relatedItem:nth-child(3) {
+    grid-column: 1 / 9;
+  }
+}

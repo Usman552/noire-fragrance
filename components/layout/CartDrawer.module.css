@@ -1,0 +1,264 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0s linear 0.8s;
+}
+
+.root[data-open="true"] {
+  pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.55);
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-out);
+}
+
+.root[data-open="true"] .overlay {
+  opacity: 1;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 100vw);
+  display: flex;
+  flex-direction: column;
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 0.8s var(--ease-in-out);
+}
+
+.root[data-open="true"] .panel {
+  clip-path: inset(0 0 0 0);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+}
+
+.title span {
+  font-size: 1rem;
+  color: var(--fg-soft);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -0.6rem;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.close:hover {
+  transform: rotate(90deg);
+}
+
+.close svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.empty {
+  flex: 1;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1rem;
+  padding: 2rem 1.6rem;
+}
+
+.emptyTitle {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 9vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.empty :global(.btn) {
+  margin-top: 1rem;
+}
+
+.delivery {
+  padding: 1rem 1.6rem;
+  font-size: 0.82rem;
+  color: var(--fg-soft);
+  border-bottom: 1px solid var(--rule);
+}
+
+.bar {
+  height: 1px;
+  margin-top: 0.75rem;
+  background: var(--rule);
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transform-origin: left;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.lines {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.25rem 1.6rem;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 1.1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.root[data-open="true"] .line {
+  animation: lineIn 0.8s var(--ease-out) both;
+  animation-delay: calc(0.3s + var(--i, 0) * 0.06s);
+}
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0);
+  }
+}
+
+.thumb {
+  display: block;
+  align-self: start;
+}
+
+.thumbImg {
+  aspect-ratio: 4 / 5;
+}
+
+.lineInfo {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+.lineTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lineName {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.lineMeta {
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.linePrice {
+  white-space: nowrap;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.lineBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.remove {
+  min-height: 44px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.3s;
+}
+
+.remove:hover {
+  color: var(--fg);
+}
+
+.unit {
+  font-size: 0.78rem;
+  color: var(--fg-soft);
+}
+
+.foot {
+  display: grid;
+  gap: 1rem;
+  padding: 1.3rem 1.6rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  background: var(--ivory-2);
+}
+
+.totals {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totals dt {
+  color: var(--fg-soft);
+}
+
+.total {
+  margin-top: 0.4rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-size: 1.35rem;
+}
+
+.total dt {
+  color: var(--fg) !important;
+}
+
+.continue {
+  justify-self: center;
+}
+
+.demo {
+  font-size: 0.72rem;
+  color: var(--fg-soft);
+  text-align: center;
+}

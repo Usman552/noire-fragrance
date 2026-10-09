@@ -1,0 +1,41 @@
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule);
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--fg);
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
+}
+
+.btn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--fg) 7%, transparent);
+}
+
+.btn:disabled {
+  color: color-mix(in srgb, var(--fg) 30%, transparent);
+  cursor: not-allowed;
+}
+
+.btn svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.value {
+  min-width: 2.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.md .btn {
+  width: 54px;
+  height: 54px;
+}
