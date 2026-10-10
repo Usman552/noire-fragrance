@@ -1,5 +1,8 @@
 .hero {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: max(100svh, 680px);
   overflow: hidden;
   isolation: isolate;
@@ -86,12 +89,13 @@
 
 /* ---------- Headline ---------- */
 
+/* In flow (not absolutely positioned), so on short screens the hero grows
+   instead of the headline overlapping the copy and buttons above it. */
 .title {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  left: var(--gutter);
-  bottom: clamp(1.75rem, 5vh, 3.5rem);
-  font-size: min(11.4vw, 17.5vh);
+  margin: clamp(2rem, 5vh, 3rem) 0 clamp(1.75rem, 5vh, 3.5rem) var(--gutter);
+  font-size: min(11.4vw, 14vh);
   pointer-events: none;
 }
 
@@ -144,8 +148,9 @@
 
   .title {
     position: absolute;
+    left: var(--gutter);
     top: calc(min(78svh, 46rem) - 15.5vw * 2.62 - 0.75rem);
-    bottom: auto;
+    margin: 0;
     font-size: 15.5vw;
   }
 
